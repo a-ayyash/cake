@@ -42,7 +42,7 @@ void highest_sum(vector<int> &vec) {
 int main() {
   //vector<int> v {5,1,4,7,1,2,4,13,5,6};
   //vector<int> v {-10,-12,-2,-14,-1,-22,-3};
-  vector<int> v {5,1,4,-7,1,2,4,13,5,6,10};
+  vector<int> v {5,1,4,7,1,2,4,13,5,6,10};
 
   highest_sum(v);
 

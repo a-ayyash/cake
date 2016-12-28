@@ -2,9 +2,8 @@
 #include <iostream>
 using namespace std;
 
-vector<int> denomenations;
 
-int check(int coin, int count) {
+int check(int coin, vector<int> denomenations) {
   if (denomenations.size() == 0) {
     return -1;
   }
@@ -13,33 +12,21 @@ int check(int coin, int count) {
     return 0;
   }
 
+  vector<int> pipe;
+  pipe.push_back(coin);
 
-  for(int i : denomenations) {
-    cout << "checkout for coin " << coin << " and i " << i << endl;
-    if (coin < i) {
-      break;
-    }
+  int count = 0;
 
+  while(!pipe.empty()) {
+    int c = pipe.back();
+    pipe.pop_back();
 
-    if (1 == i) {
-      count++;
-      cout << "count = " << count << endl;
-      continue;
-    }
-
-    if (coin == i) {
-      continue;
-    }
-
-    if (coin % i == 0) {
-        count = 1 + check(coin/i, count);
-      cout << "count = " << count << endl;
-    } else {
-      int r = check(coin%i, count);
-
-      if (r > 0) {
-        count = 1 + (r-1);
-        cout << "r count = " << count << endl;
+    for(int i : denomenations) {
+      if (c % i == 0) {
+        count++;
+        pipe.push_back(c/i);
+      } else {
+        pipe.push_back(c%i);
       }
     }
   }
@@ -49,8 +36,7 @@ int check(int coin, int count) {
 
 
 int main() {
-  denomenations = {12, 4};
-  int count = check(7, 0);
+  int count = check(7, {1,4});
   cout << count << endl;
   return 0;
 }
